@@ -84,7 +84,7 @@ If you want to publish your package as part of an NPM organization, you need to 
 
 Now that we have Travis configured we want to automate our deployment workflow. It will handle several things for us:
 * Our [Semantic versioning](http://semver.org/).
-* Publish to NPM the new versions of our package
+* Publish to NPM the new versions of our package.
 * Create *Git tags* in our Github repository.
 
 To make all of this possible we are going to use a library: [Semantic Release](https://github.com/semantic-release/semantic-release). It will read our commit messages and based on their content it will determine what *semver* bump it needs to do (Major, Minor or Bugfix). To make its job easier (and possible) we need to enforce a particular commit message format. [This is](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines) the format used by Angular team on their own repository.
@@ -95,12 +95,16 @@ Ok, now that's the introduction is done let's do it.
 
 We'll need to install several development dependencies but we also need to install a global package to setup the last bit of the Travis configuration.
 
-__For npm users:__
+_For npm users:_
+
 `npm i -D --save-exact @commitlint/cli @commitlint/config-angular commitizen cz-conventional-changelog husky lint-staged semantic-release prettier`
+
 `npm i -g semantic-release-cli`
 
-__For Yarn users:__
+_For Yarn users:_
+
 `yarn add -D --exact @commitlint/cli @commitlint/config-angular commitizen cz-conventional-changelog husky lint-staged semantic-release prettier`
+
 `yarn global add semantic-release-cli`
 
 ##### Explanations
@@ -184,7 +188,7 @@ And you'll be good to go. It will have added the `travis.yml` file at your proje
 
 You don't have to manage yourself your package version anymore, semantic-release will handle it for you after a successful Travis run.
 
-The script `semantic-release` will be runned during your Travis run and is responsible for generating your NPM package, publishing to NPM and create the according *git tag* in your Github repo along with the changelog.
+The script `semantic-release` will be runned during your Travis run and is responsible for generating your NPM package, publishing to NPM and creating the according *git tag* in your Github repo along with the changelog.
 
 Now let's take a look at the `travis.yml` file:
 ```yml
@@ -208,26 +212,27 @@ branches:
 
 Your `travis.yml` might not be identical as this one so I'll just pinpoint the import part:
 * Make sure to always have a **Node v8+** build in your configuration. Semantic-release does not work in an environment < Node v8.0.0. In Travis the run with the highest Node version is the build leader so it will be responsible of running the `npm run semantic-release` command.
-* Your package will be runned against every node version specified in the `node_js` property. They all need to passed for your build to succeed.
+* Your package will be runned against every node version specified in the `node_js` property. They all need to pass for your build to succeed.
 * If you are using the latest version of NPM, make sure to update it before Travis installs your project dependencies by adding:
 ```yml
 before_install:
   - npm install -g npm@latest
 ```
-* The part with `npm prune` might not be useful so you can delete it. It can even be a problem and remove semantic-release hence preventing you from publishing. (That's the conclusion I came to but if I'm wrong feel free to make a PR and correct that :+1: )
+* The part with `npm prune` might not be useful so you can delete it. It can even be a problem and remove semantic-release hence preventing you from publishing. (That's the conclusion I came to but if I'm wrong feel free to make a PR and correct that :+1: ).
+* Travis runs by default your `npm/yarn test` script defined in your `package.json`.
 
 
 ### Step 5: Add NPM metadata
 
 To provide NPM with as much information about your package we have to update your `package.json`.
 
-First if you want to publish your package as a **scoped package** meaning that it is part of an organization then you need to update your package name as is: `"version": "@scope/packageName"` i.e for an organization named `dixeed` and a package `utils` the updated name would be: `@dixeed/utils`.
+First if you want to publish your package as a **scoped package** meaning that it is part of an organization then you need to update your package name as is: `"name": "@scope/packageName"` i.e for an organization named `dixeed` and a package `utils` the updated name would be: `@dixeed/utils`.
 
 Make sure you have a `main` field as well. See [this](https://docs.npmjs.com/files/package.json#main) for more information.
 
 Then you can add `keywords` to your package to help users searching for it in the NPM registry. See [this](https://docs.npmjs.com/files/package.json#keywords) for more information.
 
-You need also to specify which files needs to be part of your package for your users to properly use it. See [this](https://docs.npmjs.com/files/package.json#files) for more information. A good rule of thumb is that **if your package does not depend on a file or folder to run don't add it** i.e tests folder. If your package is compiled by some library (webpack, rollup, babel ...) you might want to include only those.
+You need also to specify which files needs to be part of your package for your users to properly use it. See [this](https://docs.npmjs.com/files/package.json#files) for more information. A good rule of thumb is that **if your package does not depend on a file or folder to run don't add it** i.e tests folder. If your package is compiled by some library (webpack, rollup, babel ...) you might want to include only the files resulting from their build.
 
 If your package depends on particular version of node or npm you can specify it in the `engines` field. See [here](https://docs.npmjs.com/files/package.json#engines) for more information.
 
@@ -241,15 +246,15 @@ Full documentation is [here](https://docs.npmjs.com/files/package.json).
 Everyting has been setup in the previous steps for your environment to deploy your package. You just need to actually commit your work for semantic-release to have something to work with.
 
 When using `npm/yarn run cm` you will be prompted about which kind of commit you are trying to do. You should know that only two types actually impact your package semver:
-* feat
-  * Alone a feat commit with bump the minor version number
-  * If the commit message comes with a `BREAKING CHANGE: ` in its footer then it will bump the major version number
-* fix
-  * It will bump your bugfix version number
+* `feat`
+  * Alone a `feat` commit with bump the minor version number.
+  * If the commit message comes with a `BREAKING CHANGE: ` in its footer then it will bump the major version number.
+* `fix`
+  * It will bump your bugfix version number.
 
-Semantic-release will aggregate your different commit to determine your next semver version i.e if you have 2 bugfixes and 5 feat commit (without any breaking change mentions) it will gather all of them under one single minor version bump. So if your previous version was: *v1.3.4* the next one will be *v1.4.0*.
+Semantic-release will aggregate your different commits to determine your next semver version i.e if you have 2 bugfixes and 5 feat commit (without any breaking change mentions) it will gather all of them under one single minor version bump. So if your previous version was: *v1.3.4* the next one will be *v1.4.0*.
 
-You need to be using semantic-release for the ground up. Just make sure to push your commits on master once you are satisfied for a `v1.0.0` release. Semantic-release will always push your first version as `v1.0.0`. If you want to commit your Work In Progress just create a `dev` branch and work on it until you're satisfied with your current work state for the release.
+You need to be using semantic-release from the ground up. Just make sure to push your commits on master once you are satisfied for a `v1.0.0` release. Semantic-release will always push your first version as `v1.0.0`. If you want to commit your Work In Progress just create a `dev` branch and work on it until you're satisfied with your current work state for the release then merge it on master and push.
 
 ### Optional
 
