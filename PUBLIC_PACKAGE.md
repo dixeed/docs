@@ -8,7 +8,7 @@ This documentation is based on this [Egghead.io excellent video](https://egghead
 
 ## Requirements
 
-This documentation assumes that your repository is open source and hosted on **Github** hence you should have created a public Github repository. You need then to **clone** your repository on your computer to start work on it.
+This documentation assumes that your repository is open source and hosted on **Github** hence you should have created a public Github repository. You need then to **clone** your repository on your computer to start working on it.
 
 ## Steps
 
@@ -50,24 +50,24 @@ To get started you need to create an account (or connect if you already have one
 
 Once connected you should access your profile:
 <p align="center">
-![Travis profile button](images/PUBLIC_PACKAGE/travis_profile.png)
+  <img src="images/PUBLIC_PACKAGE/travis_profile.png" alt="Travis profile button">
 </p>
 
 Here you have the list of your public Github repositories:
 <p align="center">
-![Travis repositories list](images/PUBLIC_PACKAGE/travis_own_repo.png)
+  <img src="images/PUBLIC_PACKAGE/travis_own_repo.png" alt="Travis repositories list">
 </p>
 
 If you don't find your project in the list, you can use the **Sync account** that you can see on the above picture. It will update your Github information.
 
 If the repository you are working on is part of an [Organization Github account](https://help.github.com/articles/collaborating-with-groups-in-organizations/) you can find the list of your organizations on the left of your repositories list:
 <p align="center">
-![Travis org list](images/PUBLIC_PACKAGE/travis_org_list.png)
+  <img src="images/PUBLIC_PACKAGE/travis_org_list.png" alt="Travis org list">
 </p>
 
 Once you have found the repository you are working on, you just need to activate it using the switch on the left of its name:
 <p align="center">
-![Travis active repo](images/PUBLIC_PACKAGE/travis_active_repo.png)
+  <img src="images/PUBLIC_PACKAGE/travis_active_repo.png" alt="Travis active repo">
 </p>
 
 That's it! Travis is enabled for your project. It does not work as is but we'll get it working in the next section.
