@@ -1,0 +1,55 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "Dixeed knowledge base",
+  "main": "index.js",
+  "scripts": {
+    "lint-staged": "lint-staged",
+    "precommit": "lint-staged",
+    "cm": "git-cz",
+    "commitmsg": "commitlint -e",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dixeed/docs.git"
+  },
+  "author": "Nargonath <jonas.pauthier@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dixeed/docs/issues"
+  },
+  "homepage": "https://github.com/dixeed/docs#readme",
+  "lint-staged": {
+    "{examples/**/*.js,*.js}": [
+      "prettier-eslint --write --print-width 100 --trailing-comma all --single-quote",
+      "eslint",
+      "git add"
+    ],
+    "{examples/**/*.{json, *.md},*.{json, *.md}}": [
+      "prettier-eslint --write --print-width 100 --trailing-comma all --single-quote",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "getLastRelease": "last-release-git"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "5.0.1",
+    "@commitlint/config-angular": "4.3.0",
+    "@dixeed/eslint-config": "1.4.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
+    "husky": "0.14.3",
+    "last-release-git": "0.0.3",
+    "lint-staged": "5.0.0",
+    "prettier": "1.8.2",
+    "prettier-eslint": "8.2.2",
+    "prettier-eslint-cli": "4.4.0"
+  }
+}
