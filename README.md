@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-* [Publishing a public NPM package](PUBLIC_PACKAGE.md)
+* [Publishing a public NPM package](resources/PUBLIC_PACKAGE.md)
 
 ## Contributing
 
