@@ -7,6 +7,7 @@
 * [Publishing a public NPM package](resources/PUBLIC_PACKAGE.md)
 * [NoSQL](resources/NOSQL.md)
 * [Database optimization](resources/DATABASE_OPTI.md)
+* [Hapi v17](resources/HAPI_17.md)
 
 ## Contributing
 
