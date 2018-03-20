@@ -18,6 +18,15 @@ Usually NoSQL database system are of: **AP** or **CP**.
 
 ## Categories
 
+This section will go through the main NoSQL categories mentioning some of their characteristics. The categories detailed are:
+
+* key/value paradigm
+* document oriented
+* column oriented
+* graph oriented
+* search engines
+* time series database
+
 ### Key/value
 
 * The simplest
