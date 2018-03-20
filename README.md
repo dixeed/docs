@@ -5,6 +5,7 @@
 ## Table of contents
 
 * [Publishing a public NPM package](resources/PUBLIC_PACKAGE.md)
+* [NoSQL](resources/NOSQL.md)
 
 ## Contributing
 
