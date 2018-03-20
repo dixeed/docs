@@ -6,6 +6,7 @@
 
 * [Publishing a public NPM package](resources/PUBLIC_PACKAGE.md)
 * [NoSQL](resources/NOSQL.md)
+* [Database optimization](resources/DATABASE_OPTI.md)
 
 ## Contributing
 
